@@ -221,6 +221,9 @@ struct boss_sartharion : public BossAI
             {
                 if (tenebron->HasUnitFlag(UNIT_FLAG_NON_ATTACKABLE))
                     tenebron->RemoveUnitFlag(UNIT_FLAG_NON_ATTACKABLE);
+
+                tenebron->SetReactState(REACT_AGGRESSIVE);
+
                 tenebron->GetMotionMaster()->MoveTargetedHome();
             }
             else
@@ -241,6 +244,9 @@ struct boss_sartharion : public BossAI
             {
                 if (shadron->HasUnitFlag(UNIT_FLAG_NON_ATTACKABLE))
                     shadron->RemoveUnitFlag(UNIT_FLAG_NON_ATTACKABLE);
+
+                shadron->SetReactState(REACT_AGGRESSIVE);
+
                 shadron->GetMotionMaster()->MoveTargetedHome();
             }
             else
@@ -261,6 +267,9 @@ struct boss_sartharion : public BossAI
             {
                 if (vesperon->HasUnitFlag(UNIT_FLAG_NON_ATTACKABLE))
                     vesperon->RemoveUnitFlag(UNIT_FLAG_NON_ATTACKABLE);
+
+                vesperon->SetReactState(REACT_AGGRESSIVE);
+
                 vesperon->GetMotionMaster()->MoveTargetedHome();
             }
             else
@@ -298,6 +307,8 @@ struct boss_sartharion : public BossAI
 
                 if (!fetchTene->HasUnitFlag(UNIT_FLAG_NON_ATTACKABLE))
                     fetchTene->SetUnitFlag(UNIT_FLAG_NON_ATTACKABLE);
+
+                fetchTene->SetReactState(REACT_PASSIVE);
             }
         }
 
@@ -316,6 +327,8 @@ struct boss_sartharion : public BossAI
 
                 if (!fetchShad->HasUnitFlag(UNIT_FLAG_NON_ATTACKABLE))
                     fetchShad->SetUnitFlag(UNIT_FLAG_NON_ATTACKABLE);
+
+                fetchShad->SetReactState(REACT_PASSIVE);
             }
         }
 
@@ -334,6 +347,8 @@ struct boss_sartharion : public BossAI
 
                 if (!fetchVesp->HasUnitFlag(UNIT_FLAG_NON_ATTACKABLE))
                     fetchVesp->SetUnitFlag(UNIT_FLAG_NON_ATTACKABLE);
+
+                fetchVesp->SetReactState(REACT_PASSIVE);
             }
         }
 
@@ -351,6 +366,8 @@ struct boss_sartharion : public BossAI
 
                 if (temp->HasUnitFlag(UNIT_FLAG_NON_ATTACKABLE))
                     temp->RemoveUnitFlag(UNIT_FLAG_NON_ATTACKABLE);
+
+                temp->SetReactState(REACT_AGGRESSIVE);
 
                 uint8 textId = 0;
 

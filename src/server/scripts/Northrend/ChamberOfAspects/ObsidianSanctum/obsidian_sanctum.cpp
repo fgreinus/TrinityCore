@@ -180,6 +180,8 @@ struct dummy_dragonAI : public ScriptedAI
         if (me->HasUnitFlag(UNIT_FLAG_NON_ATTACKABLE))
             me->RemoveUnitFlag(UNIT_FLAG_NON_ATTACKABLE);
 
+        me->SetReactState(REACT_AGGRESSIVE);
+
         events.Reset();
         Initialize();
     }
