@@ -27,8 +27,10 @@
 #include "MotionMaster.h"
 #include "ObjectAccessor.h"
 #include "Spell.h"
+#include "SpellHistory.h"
 #include "SpellMgr.h"
 #include "TemporarySummon.h"
+
 
 // Spell summary for ScriptedAI::SelectSpell
 struct TSpellSummary
@@ -507,7 +509,10 @@ void BossAI::_Reset()
     summons.DespawnAll();
     scheduler.CancelAll();
     if (instance && instance->GetBossState(_bossId) != DONE)
+    {
         instance->SetBossState(_bossId, NOT_STARTED);
+        this->_ResetPlayerCooldowns();
+    }
 }
 
 void BossAI::_JustDied()
@@ -516,7 +521,25 @@ void BossAI::_JustDied()
     summons.DespawnAll();
     scheduler.CancelAll();
     if (instance)
+    {
         instance->SetBossState(_bossId, DONE);
+        this->_ResetPlayerCooldowns();
+    }
+}
+
+void BossAI::_ResetPlayerCooldowns()
+{
+    // remove heroism debuff
+    instance->DoRemoveAurasDueToSpellOnPlayers(57723, true, true);
+
+    Map::PlayerList const& playerList = instance->instance->GetPlayers();
+    for (auto itr = playerList.begin(); itr != playerList.end(); ++itr)
+    {
+        if (Player* player = itr->GetSource())
+        {
+            player->GetSpellHistory()->ResetAllCooldowns();
+        }
+    }
 }
 
 void BossAI::_JustReachedHome()
