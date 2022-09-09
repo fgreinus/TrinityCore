@@ -189,6 +189,12 @@ struct npc_webwrap : public NullCreatureAI
     void InitializeAI() override
     {
         me->SetVisible(false);
+        me->SetRegenerateHealth(false);
+    }
+
+    void Reset() override
+    {
+        me->SetRegenerateHealth(false);
     }
 
     void SetGUID(ObjectGuid const& guid, int32 /*id*/) override
