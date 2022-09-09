@@ -220,6 +220,9 @@ public:
             feugen->SetFarVisible(false);
         }
         Talk(SAY_DEATH);
+
+        instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_POSITIVE_CHARGE_APPLY);
+        instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_NEGATIVE_CHARGE_APPLY);
     }
 
     void DoAction(int32 action) override
