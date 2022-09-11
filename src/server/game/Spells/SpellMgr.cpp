@@ -4680,6 +4680,13 @@ void SpellMgr::LoadSpellInfoCorrections()
         // until someone figures how to make scions not critting without hack and without making them main casters this should stay here.
         spellInfo->AttributesEx2 |= SPELL_ATTR2_CANT_CRIT;
     });
+
+    // Fire Shield Wyrmrest Skytalon
+    ApplySpellFix({ 57108 }, [](SpellInfo* spellInfo)
+    {
+        spellInfo->_effects[EFFECT_0].TargetA = SpellImplicitTargetInfo(TARGET_UNIT_CASTER);
+        spellInfo->_effects[EFFECT_1].TargetA = SpellImplicitTargetInfo(TARGET_UNIT_CASTER);
+    });
     // ENDOF EYE OF ETERNITY SPELLS
 
     //
