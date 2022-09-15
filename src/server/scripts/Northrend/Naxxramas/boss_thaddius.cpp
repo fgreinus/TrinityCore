@@ -1059,11 +1059,13 @@ class spell_thaddius_polarity_shift : public SpellScript
             {
                 if (roll_chance_i(50))
                 { // positive
+                    target->RemoveAura(SPELL_POSITIVE_CHARGE_APPLY);
                     target->CastSpell(target, SPELL_POSITIVE_CHARGE_APPLY, true);
                     target->RemoveAura(SPELL_POSITIVE_CHARGE_AMP);
                 }
                 else
                 { // negative
+                    target->RemoveAura(SPELL_NEGATIVE_CHARGE_APPLY);
                     target->CastSpell(target, SPELL_NEGATIVE_CHARGE_APPLY, true);
                     target->RemoveAura(SPELL_NEGATIVE_CHARGE_AMP);
                 }
