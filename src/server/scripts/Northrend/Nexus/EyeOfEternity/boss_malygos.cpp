@@ -1200,6 +1200,8 @@ struct npc_caster_hover_disk : public VehicleAI
         // TO DO: Something is wrong with calculations for flying creatures that are on WP/Cyclic path.
         // They should get the same difference as to when at ground from run creature switch to walk.
         me->SetSpeedRate(MOVE_FLIGHT, 0.45f);
+        me->SetSpeedRate(MOVE_RUN, 0.45f);
+        me->SetSpeedRate(MOVE_WALK, 0.45f);
     }
 
     void Reset() override
