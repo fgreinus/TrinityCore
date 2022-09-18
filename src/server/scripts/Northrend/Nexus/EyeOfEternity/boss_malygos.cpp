@@ -458,7 +458,7 @@ struct boss_malygos : public BossAI
                 {
                     Position pos;
                     pos.m_positionZ = alexstraszaBunny->GetPositionZ();
-                    alexstraszaBunny->GetNearPoint2D(nullptr, pos.m_positionX, pos.m_positionY, 30.0f, alexstraszaBunny->GetAbsoluteAngle(me));
+                    alexstraszaBunny->GetNearPoint2D(nullptr, pos.m_positionX, pos.m_positionY, 0.f, alexstraszaBunny->GetAbsoluteAngle(me));
                     me->GetMotionMaster()->MoveLand(POINT_LAND_P_ONE, pos);
                     me->SetImmuneToAll(false);
                     DoZoneInCombat();
@@ -643,7 +643,7 @@ struct boss_malygos : public BossAI
             return;
 
         if (who->GetEntry() == NPC_POWER_SPARK)
-            if (who->GetDistance(me) <= 2.5f)
+            if (who->GetExactDist(me) <= 12.5f)
                 who->CastSpell(me, SPELL_POWER_SPARK_MALYGOS, true);
     }
 
@@ -1054,7 +1054,7 @@ struct npc_power_spark : public ScriptedAI
         me->GetMotionMaster()->MoveIdle();
 
         if (Creature* malygos = ObjectAccessor::GetCreature(*me, _instance->GetGuidData(DATA_MALYGOS)))
-            me->GetMotionMaster()->MoveFollow(malygos, 0.0f, 0.0f);
+            me->GetMotionMaster()->MoveFollow(malygos, -15.0f, 0.0f);
     }
 
     void UpdateAI(uint32 /*diff*/) override
@@ -1072,12 +1072,13 @@ struct npc_power_spark : public ScriptedAI
 
             if (malygos->HasAura(SPELL_VORTEX_1))
             {
+                me->GetMotionMaster()->Clear();
                 me->GetMotionMaster()->MoveIdle();
                 return;
             }
 
-            if (me->GetMotionMaster()->GetCurrentMovementGeneratorType() != CHASE_MOTION_TYPE)
-                me->GetMotionMaster()->MoveFollow(malygos, 0.0f, 0.0f);
+            if (me->GetMotionMaster()->GetCurrentMovementGeneratorType() != FOLLOW_MOTION_TYPE)
+                me->GetMotionMaster()->MoveFollow(malygos, -15.0f, 0.0f);
         }
     }
 
